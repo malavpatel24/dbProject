@@ -20,6 +20,8 @@
 #### branch, merge, and workflow...
 - git branch: shows the branches
 - git branch (filename)   - creates a copy of the master branch
+- git checkout (branch_name) - switch to (branch name) branch
+
 
 #### vim notes
  - will add later..
