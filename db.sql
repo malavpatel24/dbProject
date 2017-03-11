@@ -1,3 +1,5 @@
+CREATE SCHEMA 'locBucket';
+
 CREATE TABLE `locBucket`.`User` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
