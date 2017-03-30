@@ -60,11 +60,13 @@ router.post('/register', function(req, res){
 
 	var errors = req.validationErrors();
 
+	//If there are errors, return to register page with errors
 	if(errors){
 		res.render('register',{
 			errors:errors
 		});
 	} else {
+		//Create the new user for the database
 		var newUser = new User({
 			name: name,
 			email:email,
@@ -72,6 +74,7 @@ router.post('/register', function(req, res){
 			password: password
 		});
 
+		//Store the new user
 		User.createUser(newUser, function(err, user){
 			if(err) throw err;
 			console.log(user);
@@ -83,14 +86,35 @@ router.post('/register', function(req, res){
 	}
 });
 
+router.post('/login',
+  passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+router.get('/logout', function(req, res){
+	req.logout();
+
+	req.flash('success_msg', 'You are logged out');
+
+	res.redirect('/users/login');
+});
+
+//The below functions tell passport, the user manager, how to
+//	process the user logins
 passport.use(new LocalStrategy(
   function(username, password, done) {
+	 //To login using passport, each of the below function must not
+	 //	 interrupted by the false return done() statements
+
+	 //Check if the user exists
    User.getUserByUsername(username, function(err, user){
    	if(err) throw err;
    	if(!user){
    		return done(null, false, {message: 'Unknown User'});
    	}
 
+		//User exists, check that the password matches
    	User.comparePassword(password, user.password, function(err, isMatch){
    		if(err) throw err;
    		if(isMatch){
@@ -125,5 +149,4 @@ router.get('/logout', function(req, res){
 
 	res.redirect('/users/login');
 });
-
 module.exports = router;
