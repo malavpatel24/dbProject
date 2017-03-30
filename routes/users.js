@@ -15,6 +15,33 @@ router.get('/login', function(req, res){
 	res.render('login');
 });
 
+router.get('/test', function(req, res){
+	//res.render('login');
+	var mysql = require("mysql");
+
+	var connection = mysql.createConnection({
+	   host: 'localhost',
+	   user: 'root',
+	   password: 'dreameater',
+	   database: 'hw2_check'
+	});
+	connection.connect();
+
+	var query = connection.query("SELECT pname FROM parts", function(err, result) {
+	   if (err){
+	      console.error(err);
+	      return;
+	   }
+	   console.log(result);
+	});
+
+});
+
+
+
+
+
+
 // Register User
 router.post('/register', function(req, res){
 	var name = req.body.name;
