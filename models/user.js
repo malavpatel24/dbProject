@@ -8,26 +8,17 @@ var connection = mysql.createConnection({
    database: process.env.DB_SCHEMA
 });
 
-/*
-connection.connect();
-var query = connection.query("SELECT pname FROM parts", function(err, result) {
-   if (err){
-      console.error(err);
-      return;
-   }
-   console.log(result);
-});*/
-
 //User class
 var User = module.exports = function(values) {
 	this.name = values['name'];
   this.email = values['email'];
   this.username = values['username'];
   this.password = values['password'];
-  this.role_id = 1;
+  this.role_id = 1; //Role of a standard user
 }
 
 module.exports.createUser = function(newUser, callback){
+  //Hash the password for secure storage
 	bcrypt.genSalt(10, function(err, salt) {
 	    bcrypt.hash(newUser.password, salt, function(err, hash) {
 	        newUser.password = hash;
@@ -36,7 +27,7 @@ module.exports.createUser = function(newUser, callback){
 
 	//Query to inser user
 	var queryString = "INSERT INTO `locBucket`.`User` " +
-	"(`id`, `name`, `email`, `password` , `role_id`) " +
+	"(`id`, `name`, `email`, `password`, `role_id`) " +
 	"VALUES (?, ?, ?, ?, ?);";
 
 	//Set up values
