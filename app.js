@@ -8,6 +8,8 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var env = require('node-env-file');
+env(__dirname + '/.env'); //Set environment variables
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -68,8 +70,6 @@ app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   next();
 });
-
-
 
 app.use('/', routes);
 app.use('/users', users);

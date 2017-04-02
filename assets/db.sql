@@ -1,4 +1,4 @@
-CREATE SCHEMA 'locBucket';
+CREATE SCHEMA `locBucket`;
 
 CREATE TABLE `locBucket`.`User` (
   `id` INT NOT NULL,
