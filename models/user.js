@@ -24,7 +24,10 @@ var User = module.exports = function(values) {
   this.email = values['email'];
   this.username = values['username'];
   this.password = values['password'];
-  this.role_id = 1;
+  if(typeof values['role_id'] !== 'undefined')
+    this.role_id = values['role_id'];
+  else
+    this.role_id = 1;
 }
 
 module.exports.createUser = function(newUser, callback){
@@ -34,31 +37,39 @@ module.exports.createUser = function(newUser, callback){
 	    });
 	});
 
-	//Query to inser user
-	var queryString = "INSERT INTO `locBucket`.`User` " +
-	"(`id`, `name`, `email`, `password` , `role_id`) " +
-	"VALUES (?, ?, ?, ?, ?);";
+	//Query to insert user
+	var queryString = "INSERT INTO `locBucket`.`users` " +
+	"(`name`, `email`, `password` , `role_id`) " +
+	"VALUES (?, ?, ?, ?);";
 
 	//Set up values
-	var values = [5, newUser.name, newUser.email, newUser.password, newUser.role_id];
+	var values = [newUser.name, newUser.email, newUser.password, newUser.role_id];
 
 	//Run query
 	connection.connect();
 	connection.query(queryString, values, function(err, rows, fields) {
 	    if (err) throw err;
-
-	    for (var i in rows) {
-	        console.log(rows[i]);
-	    }
 	});
 	connection.end();
 
 	callback();
 }
 
-module.exports.getUserByUsername = function(username, callback){
-	var query = {username: username};
-	User.findOne(query, callback);
+module.exports.getUserByEmail = function(email, callback){
+  //Query to find a user
+	var queryString = "SELECT * FROM users WHERE email=?";
+
+	//Run query
+	connection.connect();
+  var result;
+	rows = connection.query(queryString, [email], function(err, rows, fields) {
+	    if (err) throw err;
+
+      result = rows;
+	});
+
+  console.log(result)
+	connection.end();
 }
 
 module.exports.getUserById = function(id, callback){

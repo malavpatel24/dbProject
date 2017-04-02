@@ -6,6 +6,11 @@ router.get('/', function(req, res){
 	res.render('index', {layout: false});
 });
 
+// Used for testing functions
+router.get('/test', function(req, res){
+	res.render('about');
+});
+
 // Get About Page
 router.get('/about', function(req, res){
 	res.render('about');
