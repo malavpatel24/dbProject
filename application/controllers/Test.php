@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class test extends CI_Controller {
+class Test extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -23,7 +23,7 @@ class test extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('session'); //Will need session to do login
-		$this->load->model(['User', 'Locations']);
+		$this->load->model(['User', 'Location']);
 	}
 
 	//This just "redirects" to login
@@ -33,6 +33,7 @@ class test extends CI_Controller {
 		//$this->Location->login(); //Call Location functions like this
 
 		//print_r($var) //Print a variable to stdout, without a view
+		print_r('Hey There');
 
 		//$this->load->view('view-to-test'); //Pass a view here to load it
 		//$this->load->view('view-to-test', ['locations' => $locations]); //Passes the locations variable to the view, so it can be used in the view
