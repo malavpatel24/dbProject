@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Users extends CI_Controller {
+class test extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -23,13 +23,13 @@ class Users extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('session'); //Will need session to do login
-		$this->load->model('User');
+		$this->load->model(['User', 'Locations']);
 	}
 
 	//This just "redirects" to login
 	public function index()
 	{
-		$this->Users->login();
+		$this->load->view('view-to-test');
 	}
 
 	//Route to register a user
