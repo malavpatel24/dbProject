@@ -32,6 +32,9 @@ class test extends CI_Controller {
 		//$this->User->login(); //Call user functions like this
 		//$this->Location->login(); //Call Location functions like this
 
+		//print_r($var) //Print a variable to stdout, without a view
+
 		//$this->load->view('view-to-test'); //Pass a view here to load it
+		//$this->load->view('view-to-test', ['locations' => $locations]); //Passes the locations variable to the view, so it can be used in the view
 	}
 }
