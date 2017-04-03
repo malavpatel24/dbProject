@@ -34,7 +34,21 @@ class Users extends CI_Controller {
 	//Route to register a user
 	public function register()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('register');
+	}
+
+	//Performs the registration given in register()
+	public function do_register()
+	{
+		$user = new User();
+
+		$user->name = $this->input->post('name');
+		$user->email = $this->input->post('email');
+		$user->password = $this->input->post('password');
+
+		$this->User->create_user($user);
+
+		$this->load->view('register');
 	}
 
 	//Route for user to login

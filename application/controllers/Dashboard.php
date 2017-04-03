@@ -24,6 +24,7 @@ class Dashboard extends CI_Controller {
 	   parent::__construct();
 		//Check that the user is logged in here. If not, redirect to login
 		$this->load->library('session'); //Will need session to do login
+		$this->load->database();
 	}
 
 	//Displays this users dashboard
@@ -43,6 +44,9 @@ class Dashboard extends CI_Controller {
 	//If a specific user (i.e. this user) is specified, show info about that user
 	public function users()
 	{
+		$this->load->model('User');
+		$users = $this->User->get_users();
+		print_r($users);
 		$this->load->view('welcome_message');
 	}
 }
