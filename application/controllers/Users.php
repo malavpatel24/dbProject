@@ -23,6 +23,7 @@ class Users extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('session'); //Will need session to do login
+		$this->load->model('User');
 	}
 
 	//This just "redirects" to login
@@ -48,7 +49,7 @@ class Users extends CI_Controller {
 
 		$this->User->create_user($user);
 
-		$this->load->view('register');
+		$this->load->view('login');
 	}
 
 	//Route for user to login

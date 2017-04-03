@@ -11,18 +11,33 @@ class Location extends CI_Model {
   //Returns a list of all locations
   public function get_locations()
   {
+     $q_string = "SELECT l.name, l.description FROM Location l;";
+     $query = $this->db->query($q_string);
+     $rows = $query->result('Location');
+
+     return $rows;
 
   }
 
   //Returns a location specified by id
   public function get_location($id)
   {
+     $q_string = "SELECT * FROM location WHERE id = ?;";
+     $query = $this->db->query($q_string,array($id));
+     $rows = $query->result('Location');
 
+     return $rows;
   }
 
   //Returns a location ranking specified by id
   public function get_location_ranking($id)
   {
+     $q_string = "SELECT l.name, l.description FROM location l, ranking r
+      WHERE id = ? AND r.location_id =?;";
+     $query = $this->db->query($q_string,array($id));
+     $rows = $query->result('Location');
+
+     return $rows;
 
   }
 
