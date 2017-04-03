@@ -19,6 +19,12 @@ class Users extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('session'); //Will need session to do login
+	}
+
 	//This just "redirects" to login
 	public function index()
 	{
@@ -34,6 +40,14 @@ class Users extends CI_Controller {
 	//Route for user to login
 	public function login()
 	{
+		$this->session->sess_destroy();
+		$this->load->view('welcome_message');
+	}
+
+	//Route for user to logout
+	public function logout()
+	{
+		$this->session->sess_destroy(); //Remove user session and return to homepage
 		$this->load->view('welcome_message');
 	}
 

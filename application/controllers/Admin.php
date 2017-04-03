@@ -19,6 +19,13 @@ class Admin extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
+	public function __construct()
+  {
+		parent::__construct();
+		//Check that the user is logged in and an admin here. If not, redirect to login
+		$this->load->library('session'); //Will need session to do login
+  }
+
 	//Displays this admins dashboard
 	public function index()
 	{
