@@ -47,6 +47,16 @@ class User extends CI_Model {
 
     $rows = $query->result('User'); //Returns results as array of user objects
 
+    if(isset($rows[0]))
+      $user = $rows[0];
+    else
+      //USER NOT FOUND
+
+    if(isset($user) && $user->password == password_hash($password, PASSWORD_DEFAULT))
+    {
+      //Create user session
+    }
+
     return $rows;
   }
 

@@ -1,10 +1,10 @@
 <h2 class="page-header">Register</h2>
-<?php if( isset($errors)):?>
+<?php if(isset($errors)):?>
       <?php foreach($errors as $error):?>
         <div class="alert alert-danger"><?php echo $error ?></div>
       <?php endforeach;?>
 <?php endif; ?>
-<form method="post" action="<?php echo base_url(); ?>users/do-register">
+<form method="post" action="<?php echo base_url(); ?>index.php/users/do-register">
    <div class="form-group">
     <label>Name</label>
     <input type="text" class="form-control" placeholder="Name" name="name" required>
@@ -23,3 +23,4 @@
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
+<?php echo $kevin ?>
