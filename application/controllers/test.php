@@ -29,46 +29,9 @@ class test extends CI_Controller {
 	//This just "redirects" to login
 	public function index()
 	{
-		$this->load->view('view-to-test');
-	}
+		//$this->User->login(); //Call user functions like this
+		//$this->Location->login(); //Call Location functions like this
 
-	//Route to register a user
-	public function register()
-	{
-		$this->load->view('register');
-	}
-
-	//Performs the registration given in register()
-	public function do_register()
-	{
-		$user = new User();
-
-		$user->name = $this->input->post('name');
-		$user->email = $this->input->post('email');
-		$user->password = $this->input->post('password');
-
-		$this->User->create_user($user);
-
-		$this->load->view('login');
-	}
-
-	//Route for user to login
-	public function login()
-	{
-		$this->session->sess_destroy();
-		$this->load->view('welcome_message');
-	}
-
-	//Route for user to logout
-	public function logout()
-	{
-		$this->session->sess_destroy(); //Remove user session and return to homepage
-		$this->load->view('welcome_message');
-	}
-
-	//Maybe this page? Not sure if we want to implement this
-	public function forgot_password()
-	{
-		$this->load->view('welcome_message');
+		//$this->load->view('view-to-test'); //Pass a view here to load it
 	}
 }
