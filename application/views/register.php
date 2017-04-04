@@ -4,7 +4,7 @@
         <div class="alert alert-danger"><?php echo $error ?></div>
       <?php endforeach;?>
 <?php endif; ?>
-<form method="post" action="<?php echo base_url(); ?>users/do-register">
+<form method="post" action="<?php echo base_url(); ?>index.php/users/do-register">
    <div class="form-group">
     <label>Name</label>
     <input type="text" class="form-control" placeholder="Name" name="name" required>

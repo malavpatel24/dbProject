@@ -31,14 +31,28 @@ class Test extends CI_Controller {
 	{
 		//$this->User->login(); //Call user functions like this
 		//$this->Location->login(); //Call Location functions like this
-		$locationList = $this->Location->get_locations();
-		print_r($locationList);
+		//$locationList = $this->Location->get_locations();
+		//print_r($locationList);
+
+		$users = $this->User->get_users();
+
+		if($this->session->has_userdata('USER_EMAIL'))
+		{
+			print_r("Hey buddy, you are logged in as " . $this->session->userdata('USER_EMAIL'));
+			print_r("<br />");
+			print_r("Click below to logout... hopefully anyways...");
+			print_r("<br />");
+			print_r("<a href='" . base_url() ."index.php/users/logout'>Logout! :)</a>");
+			print_r("<br />");
+		}
 
 
 		//print_r($var) //Print a variable to stdout, without a view
-		print_r('Hey There');
+		//print_r('Hey There');
 
-		//$this->load->view('view-to-test'); //Pass a view here to load it
+		//$this->load->view('header'); //Pass a view here to load it
+		$this->load->view('components/users_table', ['users' => $users]);
+		//$this->load->view('footer');
 		//$this->load->view('view-to-test', ['locations' => $locations]); //Passes the locations variable to the view, so it can be used in the view
 	}
 }
