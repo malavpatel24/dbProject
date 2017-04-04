@@ -31,6 +31,7 @@ class Test extends CI_Controller {
 	{
 		//$this->User->login(); //Call user functions like this
 		//$this->Location->login(); //Call Location functions like this
+
 		//$locationList = $this->Location->get_locations();
 		//print_r($locationList);
 
