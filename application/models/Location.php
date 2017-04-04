@@ -11,7 +11,7 @@ class Location extends CI_Model {
   //Returns a list of all locations
   public function get_locations()
   {
-     $q_string = "SELECT l.name, l.description FROM Locations l;";
+     $q_string = "SELECT * FROM Locations l;";
      $query = $this->db->query($q_string);
      $rows = $query->result('Location');
 

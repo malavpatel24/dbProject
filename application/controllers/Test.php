@@ -31,8 +31,18 @@ class Test extends CI_Controller {
 	{
 		//$this->User->login(); //Call user functions like this
 		//$this->Location->login(); //Call Location functions like this
-		$locationList = $this->Location->get_locations();
-		print_r($locationList);
+		$get_locations = $this->Location->get_locations();
+		$get_location = $this->Location->get_location('name');
+		$swag = $this->input->get('id');
+		if( isset($swag))
+			$get_location = $this->Location->get_location($swag);
+		//$get_location_ranking = $this->Location->get_location_ranking(1);
+
+
+		print_r($get_locations);
+		print_r("<br />");
+		print_r("<br />");
+		print_r($get_location);
 
 
 		//print_r($var) //Print a variable to stdout, without a view
