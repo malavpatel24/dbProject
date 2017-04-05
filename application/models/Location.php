@@ -81,11 +81,10 @@ class Location extends CI_Model {
 
   //Inserts a location into the database
   public function create_location($location) {
-     $q_string = "INSERT INTO `locBucket`.`locations` (`name`, `description`, `cost`)
-      VALUES (?, ?, ?);";
-      $values = [$location->name, $location->description, $location->cost];
+     $q_string = "INSERT INTO `locBucket`.`locations` (`name`, `description`, `cost`,`type_id`)
+      VALUES (?, ?, ?, ?);";
+      $values = [$location->name, $location->description, $location->cost, $location->type_id];
       $query = $this->db->query($q_string, $values);
-
 
      return true;
     }
