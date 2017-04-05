@@ -59,7 +59,7 @@ class Location extends CI_Model {
         $q_string = "SELECT l.name,l.description,l.cost FROM locations l
         WHERE name = ? AND cost <= ?";
         $query = $this->db->query($q_string,array($name,$cost));
-        $rows - $query->result('Location');
+        $rows = $query->result('Location');
         return $rows;
      }
   }
@@ -68,20 +68,26 @@ class Location extends CI_Model {
      $q_string = "SELECT l.name,l.description,l.cost FROM locations l
      WHERE name = ?";
      $query = $this->db->query($q_string,array($name));
-     $rows - $query->result('Location');
+     $rows = $query->result('Location');
      return $rows;
   }
   public function search_by_cost($cost) {
      $q_string = "SELECT l.name,l.description,l.cost FROM locations l
      WHERE cost <= ?";
      $query = $this->db->query($q_string,array($cost));
-     $rows - $query->result('Location');
+     $rows = $query->result('Location');
      return $rows;
   }
 
   //Inserts a location into the database
-  public function create_location() {
+  public function create_location($location) {
+     $q_string = "INSERT INTO `locBucket`.`locations` (`name`, `description`, `cost`)
+      VALUES (?, ?, ?);";
+      $values = [$location->name, $location->description, $location->cost];
+      $query = $this->db->query($q_string, $values);
 
+
+     return true;
+    }
   }
-}
 ?>
