@@ -13,6 +13,7 @@
     <label>Location Type</label>
     <select class="form-control" name="type" placeholder="Select a type" required>
       <option value="ECHO ID HERE"> ECHO TYPES HERE </option>
+      <option value="1"> City </option>
     </select>
   </div>
   <div class="form-group">
