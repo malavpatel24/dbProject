@@ -19,8 +19,12 @@ public function insert_picture($picture){
    return true;
 }
 
-public function get_picture($id){
-
+public function get_picture($loc_id){
+   $q_string = "SELECT p.pic_location FROM pictures p
+   WHERE loc_id = ?";
+   $query = $this->db->query($q_string,array($loc_id));
+   $rows = $query->result('Location');
+   return $rows;
 
 }
 
