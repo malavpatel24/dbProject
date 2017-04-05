@@ -28,7 +28,7 @@ public function get_all_pictures(){
    $q_string = " SELECT p.pic_location FROM pictures p;";
    $query = $this->db->query($q_string);
    $rows = $query->result('location');
-   return rows;
+   return $rows;
 }
 }
 ?>

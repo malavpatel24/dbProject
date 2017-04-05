@@ -48,7 +48,6 @@ class Test extends CI_Controller {
 			print_r("<br />");
 		}
 
-
 		//print_r($var) //Print a variable to stdout, without a view
 		//print_r('Hey There');
 
