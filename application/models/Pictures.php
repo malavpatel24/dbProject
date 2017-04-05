@@ -8,8 +8,6 @@ class Pictures extends CI_Model {
 
 //functions
 
-// insert Picture
-// get picture
 public function insert_picture($picture){
    $q_string = "INSERT INTO `locBucket`.`pictures` (`loc_id`, `pic_location`)
     VALUES (?, ?);";
