@@ -39,7 +39,9 @@ class Users extends CI_Controller {
 		if($this->session->has_userdata('USER_ID'))
 			redirect(base_url() . 'index.php/test');//Redirect to dasboard
 
+		$this->load->view('templates/header');
 		$this->load->view('register');
+		$this->load->view('templates/footer');
 	}
 
 	//Performs the registration given in register()
@@ -73,7 +75,9 @@ class Users extends CI_Controller {
 			if(!$this->User->login($_POST['username'], $_POST['password']))
 			{
 				//Login unsuccessful. Send back to login with error
-		    $this->load->view('login', ['errors' => ['Username/Password incorrect.']]);
+				$this->load->view('templates/header');
+				$this->load->view('login', ['errors' => ['Username/Password incorrect.']]);
+				$this->load->view('templates/footer');
 			}
 			else
 			{
@@ -82,7 +86,9 @@ class Users extends CI_Controller {
 			}
 		}
 		else
-			$this->load->view('login');
+		$this->load->view('templates/header');
+		$this->load->view('login');
+		$this->load->view('templates/footer');
 	}
 
 	//Route for user to logout

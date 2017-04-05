@@ -86,6 +86,8 @@ class Location extends CI_Model {
       $values = [$location->name, $location->description, $location->cost, $location->type_id];
       $query = $this->db->query($q_string, $values);
 
+      $location->id = $this->db->insert_id(); //Get the auto-incremented id so a picture can be added after this
+
      return true;
     }
   }
