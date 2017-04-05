@@ -5,5 +5,8 @@ class Type extends CI_Model {
    public $name;
 
    //write functions here
+   // get type
+
+
 }
 ?>

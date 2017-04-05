@@ -32,7 +32,7 @@ class Test extends CI_Controller {
 		//$this->User->login(); //Call user functions like this
 		//$this->Location->login(); //Call Location functions like this
 
-		//$locations = $this->Location->get_locations();
+		$locations = $this->Location->get_locations();
 		//print_r($locationList);
 
 		$users = $this->User->get_users();
@@ -57,7 +57,7 @@ class Test extends CI_Controller {
 		$this->load->view('components/add_type', ['users' => $users]);
 		$this->load->view('components/add_location', ['users' => $users]);
 		$this->load->view('components/picture_test', ['pictures' => $pics]);
-		//$this->load->view('components/locations_table', ['locations' => $locations]);
+		$this->load->view('components/locations_table', ['locations' => $locations]);
 		//$this->load->view('footer');
 		//$this->load->view('view-to-test', ['locations' => $locations]); //Passes the locations variable to the view, so it can be used in the view
 	}

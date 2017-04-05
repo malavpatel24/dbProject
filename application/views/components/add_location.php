@@ -4,7 +4,7 @@
         <div class="alert alert-danger"><?php echo $error ?></div>
       <?php endforeach;?>
 <?php endif; ?>
-<form method="post" action="<?php echo base_url() ?>index.php/admin/d0_add_location">
+<form method="post" action="<?php echo base_url() ?>index.php/admin/do_add_location">
   <div class="form-group">
     <label>Location Name</label>
     <input type="text" class="form-control" name="locationName" placeholder="Name" required>
