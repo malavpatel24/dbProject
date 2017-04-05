@@ -23,7 +23,7 @@ class Test extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('session'); //Will need session to do login
-		$this->load->model(['User', 'Location']);
+		$this->load->model(['User', 'Location', 'Pictures']);
 	}
 
 	//This just "redirects" to login
@@ -36,6 +36,7 @@ class Test extends CI_Controller {
 		//print_r($locationList);
 
 		$users = $this->User->get_users();
+		$pics = $this->Pictures->get_all_pictures();
 
 		if($this->session->has_userdata('USER_EMAIL'))
 		{
@@ -47,7 +48,6 @@ class Test extends CI_Controller {
 			print_r("<br />");
 		}
 
-
 		//print_r($var) //Print a variable to stdout, without a view
 		//print_r('Hey There');
 
@@ -55,6 +55,7 @@ class Test extends CI_Controller {
 		$this->load->view('components/users_table', ['users' => $users]);
 		$this->load->view('components/add_type', ['users' => $users]);
 		$this->load->view('components/add_location', ['users' => $users]);
+		$this->load->view('components/picture_test', ['pictures' => $pics]);
 		$this->load->view('components/locations_table', ['locations' => $locations]);
 		//$this->load->view('footer');
 		//$this->load->view('view-to-test', ['locations' => $locations]); //Passes the locations variable to the view, so it can be used in the view
