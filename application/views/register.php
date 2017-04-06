@@ -8,7 +8,7 @@
     <?php endif; ?>
   </div>
 </div>
-<form method="post" action="<?php echo base_url(); ?>index.php/users/do-register">
+<form method="post" action="<?php echo base_url(); ?>users/do-register">
   <div class="row">
     <div class="col-xs-3">
       <div class="form-group">

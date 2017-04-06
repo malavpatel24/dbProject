@@ -37,7 +37,7 @@ class Users extends CI_Controller {
 	{
 		//If logged in, redirect to dashboard
 		if($this->session->has_userdata('USER_ID'))
-			redirect(base_url() . 'index.php/test');//Redirect to dasboard
+			redirect(base_url() . 'test');//Redirect to dasboard
 
 		$this->load->view('templates/header');
 		$this->load->view('register');
@@ -49,7 +49,7 @@ class Users extends CI_Controller {
 	{
 		//If logged in, redirect to dashboard
 		if($this->session->has_userdata('USER_ID'))
-			redirect(base_url() . 'index.php/test');//Redirect to dasboard
+			redirect(base_url() . 'test');//Redirect to dasboard
 
 		$user = new User();
 
@@ -60,7 +60,7 @@ class Users extends CI_Controller {
 		if(!$this->User->create_user($user))
 			$this->load->view('register', ['errors' => ['This email is already in use.']]);
 		else
-			redirect(base_url() . 'index.php/users/login');
+			redirect(base_url() . 'users/login');
 	}
 
 	//Route for user to login
