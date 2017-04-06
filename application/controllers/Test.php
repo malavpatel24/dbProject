@@ -32,6 +32,7 @@ class Test extends CI_Controller {
 		//$this->User->login(); //Call user functions like this
 		//$this->Location->login(); //Call Location functions like this
 
+
 		$locations = $this->Location->get_locations();
 		//print_r($locationList);
 
@@ -52,6 +53,19 @@ class Test extends CI_Controller {
 
 		//print_r($var) //Print a variable to stdout, without a view
 		//print_r('Hey There');
+
+		//$locationList = $this->Location->get_locations();
+		//print_r($locationList);
+
+		//print_r($var) //Print a variable to stdout, without a view
+
+		echo "<br>";
+
+		$this->load->view('header');
+		$this->load->view('homepage');
+		$this->load->view('footer');
+		//print_r('Testing');
+
 
 		$this->load->view('templates/header');
 		$this->load->view('components/users_table', ['users' => $users]);
