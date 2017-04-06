@@ -34,11 +34,13 @@ class Test extends CI_Controller {
 		//$locationList = $this->Location->get_locations();
 		//print_r($locationList);
 
-
 		//print_r($var) //Print a variable to stdout, without a view
 
+		echo "<br>";
 
+		$this->load->view('header');
 		$this->load->view('homepage');
+		$this->load->view('footer');
 		//print_r('Testing');
 
 		//$this->load->view('view-to-test'); //Pass a view here to load it
