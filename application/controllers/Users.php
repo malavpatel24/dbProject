@@ -37,9 +37,11 @@ class Users extends CI_Controller {
 	{
 		//If logged in, redirect to dashboard
 		if($this->session->has_userdata('USER_ID'))
-			redirect(base_url() . 'index.php/test');//Redirect to dasboard
+			redirect(base_url() . 'test');//Redirect to dasboard
 
+		$this->load->view('templates/header');
 		$this->load->view('register');
+		$this->load->view('templates/footer');
 	}
 
 	//Performs the registration given in register()
@@ -47,7 +49,7 @@ class Users extends CI_Controller {
 	{
 		//If logged in, redirect to dashboard
 		if($this->session->has_userdata('USER_ID'))
-			redirect(base_url() . 'index.php/test');//Redirect to dasboard
+			redirect(base_url() . 'test');//Redirect to dasboard
 
 		$user = new User();
 
@@ -58,7 +60,7 @@ class Users extends CI_Controller {
 		if(!$this->User->create_user($user))
 			$this->load->view('register', ['errors' => ['This email is already in use.']]);
 		else
-			redirect(base_url() . 'index.php/users/login');
+			redirect(base_url() . 'users/login');
 	}
 
 	//Route for user to login
@@ -66,23 +68,27 @@ class Users extends CI_Controller {
 	{
 		//If logged in, redirect to dashboard
 		if($this->session->has_userdata('USER_ID'))
-			redirect(base_url() . 'index.php/test');//Redirect to dasboard
+			redirect(base_url() . '');//Redirect to dasboard
 
 		if(isset($_POST['username']) && isset($_POST['password']))
 		{
 			if(!$this->User->login($_POST['username'], $_POST['password']))
 			{
 				//Login unsuccessful. Send back to login with error
-		    $this->load->view('login', ['errors' => ['Username/Password incorrect.']]);
+				$this->load->view('templates/header');
+				$this->load->view('login', ['errors' => ['Username/Password incorrect.']]);
+				$this->load->view('templates/footer');
 			}
 			else
 			{
 				//Redirect to dasboard, user session is established
-				redirect(base_url() . 'index.php/test');
+				redirect(base_url() . '');
 			}
 		}
 		else
-			$this->load->view('login');
+		$this->load->view('templates/header');
+		$this->load->view('login');
+		$this->load->view('templates/footer');
 	}
 
 	//Route for user to logout
