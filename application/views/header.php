@@ -85,9 +85,19 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
+                <?php if (!$this->session->userdata('USER_NAME')): ?>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="<?php base_url();?>users/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="<?php base_url();?>users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                <?php else: ?>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a><span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('USER_NAME') ?></a></li>
+
+                        <li><a href="<?php base_url();?>users/logout"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                    </ul>
+                <?php endif; ?>
+
+
             </div>
         </nav>

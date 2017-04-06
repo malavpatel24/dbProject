@@ -68,7 +68,7 @@ class Users extends CI_Controller {
 	{
 		//If logged in, redirect to dashboard
 		if($this->session->has_userdata('USER_ID'))
-			redirect(base_url() . 'index.php/test');//Redirect to dasboard
+			redirect(base_url() . '');//Redirect to dasboard
 
 		if(isset($_POST['username']) && isset($_POST['password']))
 		{
@@ -82,7 +82,7 @@ class Users extends CI_Controller {
 			else
 			{
 				//Redirect to dasboard, user session is established
-				redirect(base_url() . 'index.php/test');
+				redirect(base_url() . '');
 			}
 		}
 		else
