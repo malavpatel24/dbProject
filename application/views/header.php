@@ -52,34 +52,10 @@
     </head>
 
     <body>
-        <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Location Bucket-List</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-right">
-                        <div class="form-group">
-                            <input type="text" name="username" placeholder="Email" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" placeholder="Password" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-success">Sign in</button>
-                    </form>
-                </div>
-            </div>
-        </nav> -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Location Bucket-List</a>
+                    <a class="navbar-brand" href="<?php echo site_url()?>">Location Bucket-List</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="#about">About</a></li>
@@ -87,17 +63,16 @@
                 </ul>
                 <?php if (!$this->session->userdata('USER_NAME')): ?>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="<?php base_url();?>users/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="<?php base_url();?>users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="<?php echo site_url();?>users/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="<?php echo site_url();?>users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 <?php else: ?>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a><span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('USER_NAME') ?></a></li>
 
-                        <li><a href="<?php base_url();?>users/logout"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                        <li><a href="<?php echo site_url();?>users/logout"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
                     </ul>
                 <?php endif; ?>
-
-
             </div>
         </nav>
+        <div class="container">

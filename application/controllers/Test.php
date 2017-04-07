@@ -46,7 +46,7 @@ class Test extends CI_Controller {
 			print_r("<br />");
 			print_r("<p>Click below to logout... hopefully anyways...</p>");
 			print_r("<br />");
-			print_r("<a href='" . base_url() ."users/logout'>Logout! :)</a>");
+			print_r("<a href='" . site_url() ."users/logout'>Logout! :)</a>");
 			print_r("<br />");
 			print_r('</div>');
 		}

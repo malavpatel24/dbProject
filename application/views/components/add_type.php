@@ -12,7 +12,7 @@
     <h2 class="page-header">Add Type</h2>
   </div>
 </div>
-<form method="post" action="<?php echo base_url() ?>admin/add_location">
+<form method="post" action="<?php echo site_url() ?>admin/add_location">
   <div class="row">
     <div class="col-xs-3">
       <div class="form-group">

@@ -64,7 +64,7 @@ class Admin extends CI_Controller {
 		if($error != '') //Error if $error not empty string
 			$this->load->view('components/add_location', ['errors' => ['There was an error uploading the attached image: ' . $error]]);
 		else
-			redirect(base_url() . 'users/login'); //Redirect to admin dashboard when made
+			redirect(site_url() . 'users/login'); //Redirect to admin dashboard when made
 	}
 
 	//This function saves the image uploaded. Note that it returns the error on fail, and an
