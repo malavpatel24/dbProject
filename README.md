@@ -2,6 +2,12 @@
 
 Woo!
 
+# Setting up the database
+
+To help test the website, you can find a creation script for the database in the assets folder. Along with the creation script, there is a seeder, that will create several records in the database useful for testing the application. To run this, simply open or copy them into the mysql workbench or connection, and execute them.
+
+Note that if you already have a Schema named locBucket, this script may not execute correctly.
+
 # Setting up CodeIgniter
 
 Installing CodeIgniter is designed to be easy,

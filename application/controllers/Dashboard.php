@@ -24,7 +24,7 @@ class Dashboard extends CI_Controller {
 	   parent::__construct();
 		//Check that the user is logged in here. If not, redirect to login
 		$this->load->library('session'); //Will need session to do login
-		$this->load->database();
+		$this->load->model(['User', 'Location', 'Pictures']);
 	}
 
 	//Displays this users dashboard
@@ -37,7 +37,11 @@ class Dashboard extends CI_Controller {
 	//If a specific location is specified, show info about that location
 	public function locations()
 	{
-		$this->load->view('welcome_message');
+		$locations = $this->Location->get_locations();
+
+		$this->load->view('header');
+		$this->load->view('components/locations_table', ['locations' => $locations]);
+		$this->load->view('footer');
 	}
 
 	//Displays list of all users
@@ -46,7 +50,9 @@ class Dashboard extends CI_Controller {
 	{
 		$this->load->model('User');
 		$users = $this->User->get_users();
-		print_r($users);
-		$this->load->view('welcome_message');
+
+		$this->load->view('header');
+		$this->load->view('components/users_table', ['users' => $users]);
+		$this->load->view('footer');
 	}
 }

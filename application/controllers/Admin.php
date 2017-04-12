@@ -44,7 +44,9 @@ class Admin extends CI_Controller {
 	//If a specific location is specified, location can be edited
 	public function add_location()
 	{
+		$this->load->view('header');
 		$this->load->view('components/add_location');
+		$this->load->view('footer');
 	}
 
 	//Performs the registration given in register()

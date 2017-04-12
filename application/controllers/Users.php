@@ -39,9 +39,9 @@ class Users extends CI_Controller {
 		if($this->session->has_userdata('USER_ID'))
 			redirect(site_url() . 'test');//Redirect to dasboard
 
-		$this->load->view('templates/header');
+		$this->load->view('header');
 		$this->load->view('register');
-		$this->load->view('templates/footer');
+		$this->load->view('footer');
 	}
 
 	//Performs the registration given in register()
@@ -95,7 +95,7 @@ class Users extends CI_Controller {
 	public function logout()
 	{
 		$this->session->sess_destroy(); //Remove user session and return to homepage
-		$this->load->view('welcome_message'); //This should probably actually redirect to homepage
+		redirect(site_url());
 	}
 
 	//Maybe this page? Not sure if we want to implement this

@@ -67,13 +67,13 @@ class Test extends CI_Controller {
 		//print_r('Testing');
 
 
-		$this->load->view('templates/header');
+		$this->load->view('header');
 		$this->load->view('components/users_table', ['users' => $users]);
 		$this->load->view('components/add_type', ['users' => $users]);
 		$this->load->view('components/add_location', ['users' => $users]);
 		$this->load->view('components/picture_test', ['pictures' => $pics]);
 		$this->load->view('components/locations_table', ['locations' => $locations]);
-		$this->load->view('templates/footer');
+		$this->load->view('footer');
 		//$this->load->view('view-to-test', ['locations' => $locations]); //Passes the locations variable to the view, so it can be used in the view
 	}
 }
