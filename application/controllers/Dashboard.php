@@ -24,13 +24,28 @@ class Dashboard extends CI_Controller {
 	   parent::__construct();
 		//Check that the user is logged in here. If not, redirect to login
 		$this->load->library('session'); //Will need session to do login
-		$this->load->model(['User', 'Location', 'Pictures']);
+		$this->load->model(['User', 'Location', 'Pictures', 'Type']);
 	}
 
 	//Displays this users dashboard
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$locations = $this->User->get_user_locations($this->session->userdata('USER_ID'));
+		$types_by_id = $this->Type->get_types_by_id();
+
+		//Now that we have the locations, lets get each locations rating
+		foreach($locations as $location)
+			$location->ranking = $this->Location->get_location_ranking($location->id);
+
+		//We will also want to know each locations the user has ranked
+		$ranks_up = $this->User->get_user_ranked_up($this->session->userdata('USER_ID'));
+		$ranks_down = $this->User->get_user_ranked_down($this->session->userdata('USER_ID'));
+
+		$values = ['locations' => $locations, 'ranks_up' => $ranks_up, 'ranks_down' => $ranks_down, 'types' => $types_by_id];
+
+		$this->load->view('header');
+		$this->load->view('dashboard', $values);
+		$this->load->view('footer');
 	}
 
 	//Displays list of all locations
@@ -48,11 +63,30 @@ class Dashboard extends CI_Controller {
 	//If a specific user (i.e. this user) is specified, show info about that user
 	public function users()
 	{
-		$this->load->model('User');
 		$users = $this->User->get_users();
 
 		$this->load->view('header');
 		$this->load->view('components/users_table', ['users' => $users]);
 		$this->load->view('footer');
+	}
+
+	//This function is called by AJAX to change the ranking for a location
+	//The location id to change is a get parameter
+	public function increment_rank()
+	{
+		$location_id = $this->input->get('id');
+		$user_id = $this->session->userdata('USER_ID');
+
+		if(!isset($location_id) || !isset($user_id))
+		{
+			return ""; //Return empty result, as there were errors
+		}
+	}
+
+	//This function is called by AJAX to change the ranking for a location
+	//The location id to change is a get parameter
+	public function decrement_rank()
+	{
+
 	}
 }
