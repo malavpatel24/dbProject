@@ -49,4 +49,25 @@ class Dashboard extends CI_Controller {
 		print_r($users);
 		$this->load->view('welcome_message');
 	}
+
+	public function location()
+	{
+		$this->load->model('Location');
+		$this->load->model('Pictures');
+		$id = $this->input->get('id');
+
+		$locations = $this->Location->get_location($id);
+		$pictures = $this->Pictures->get_picture($id);
+
+		if (!isset($locations[0])) {
+
+			redirect(site_url('Dashboard/locations'));
+		}
+
+		$values = ['location' => $locations[0], 'pictures' => $pictures];
+
+		$this->load->view("header");
+		$this->load->view("location", $values);
+		$this->load->view("footer");
+	}
 }

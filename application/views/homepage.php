@@ -1,5 +1,4 @@
 
-
         <div style="margin-top:20px;" class="container">
             <br>
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -45,7 +44,6 @@
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-
 
             </div>
         </div>
