@@ -37,11 +37,11 @@ class Users extends CI_Controller {
 	{
 		//If logged in, redirect to dashboard
 		if($this->session->has_userdata('USER_ID'))
-			redirect(base_url() . 'test');//Redirect to dasboard
+			redirect(site_url() . 'test');//Redirect to dasboard
 
-		$this->load->view('templates/header');
+		$this->load->view('header');
 		$this->load->view('register');
-		$this->load->view('templates/footer');
+		$this->load->view('footer');
 	}
 
 	//Performs the registration given in register()
@@ -49,7 +49,7 @@ class Users extends CI_Controller {
 	{
 		//If logged in, redirect to dashboard
 		if($this->session->has_userdata('USER_ID'))
-			redirect(base_url() . 'test');//Redirect to dasboard
+			redirect(site_url() . 'test');//Redirect to dasboard
 
 		$user = new User();
 
@@ -60,7 +60,7 @@ class Users extends CI_Controller {
 		if(!$this->User->create_user($user))
 			$this->load->view('register', ['errors' => ['This email is already in use.']]);
 		else
-			redirect(base_url() . 'users/login');
+			redirect(site_url() . 'users/login');
 	}
 
 	//Route for user to login
@@ -68,34 +68,34 @@ class Users extends CI_Controller {
 	{
 		//If logged in, redirect to dashboard
 		if($this->session->has_userdata('USER_ID'))
-			redirect(base_url() . '');//Redirect to dasboard
+			redirect(site_url() . '');//Redirect to dasboard
 
 		if(isset($_POST['username']) && isset($_POST['password']))
 		{
 			if(!$this->User->login($_POST['username'], $_POST['password']))
 			{
 				//Login unsuccessful. Send back to login with error
-				$this->load->view('templates/header');
+				$this->load->view('header');
 				$this->load->view('login', ['errors' => ['Username/Password incorrect.']]);
-				$this->load->view('templates/footer');
+				$this->load->view('footer');
 			}
 			else
 			{
 				//Redirect to dasboard, user session is established
-				redirect(base_url() . '');
+				redirect(site_url() . '');
 			}
 		}
 		else
-		$this->load->view('templates/header');
+		$this->load->view('header');
 		$this->load->view('login');
-		$this->load->view('templates/footer');
+		$this->load->view('footer');
 	}
 
 	//Route for user to logout
 	public function logout()
 	{
 		$this->session->sess_destroy(); //Remove user session and return to homepage
-		$this->load->view('welcome_message'); //This should probably actually redirect to homepage
+		redirect(site_url());
 	}
 
 	//Maybe this page? Not sure if we want to implement this

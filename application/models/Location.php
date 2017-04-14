@@ -31,13 +31,15 @@ class Location extends CI_Model {
   //Returns a location ranking specified by id
   public function get_location_ranking($id)
   {
-     $q_string = "SELECT l.name, l.description FROM locations l, ranking r
-      WHERE id = ? AND r.location_id =?;";
-     $query = $this->db->query($q_string,array($id));
-     $rows = $query->result('Location');
+      $q_string = "CALL Location_Rating(?)"; //Change this to get all but password
+      $query = $this->db->query($q_string, array($id));
+      $rows = $query->result(); //Returns results as array of user objects
+      $query->next_result();
 
-     return $rows;
-
+      if(isset($rows[0]->rating))
+        return $rows[0]->rating;
+      else
+        return 0;
   }
 
   //Returns the images for the location specified

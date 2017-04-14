@@ -27,7 +27,7 @@ public function get_picture($loc_id){
 }
 
 public function get_all_pictures(){
-   $q_string = " SELECT p.pic_location FROM pictures p;";
+   $q_string = "SELECT p.pic_location FROM pictures p;";
    $query = $this->db->query($q_string);
    $rows = $query->result('location');
    return $rows;

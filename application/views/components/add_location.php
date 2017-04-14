@@ -8,7 +8,7 @@
     <?php endif; ?>
   </div>
 </div>
-<form method="post" action="<?php echo base_url() ?>admin/do_add_location" enctype="multipart/form-data">
+<form method="post" action="<?php echo site_url() ?>admin/do_add_location" enctype="multipart/form-data">
   <div class="row">
     <div class="col-xs-3">
       <div class="form-group">

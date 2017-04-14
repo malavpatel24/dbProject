@@ -8,12 +8,12 @@
     <?php endif; ?>
   </div>
 </div>
-<form method="post" action="<?php echo base_url() ?>users/login">
+<form method="post" action="<?php echo site_url() ?>users/login">
   <div class="row">
     <div class="col-xs-3">
       <div class="form-group">
-        <label>Username: Put yo usaname heare</label>
-        <input type="text" class="form-control" name="username" placeholder="Username">
+        <label>Email</label>
+        <input type="text" class="form-control" name="username" placeholder="Email">
       </div>
     </div>
   </div>

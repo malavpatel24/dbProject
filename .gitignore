@@ -3,3 +3,5 @@ application/config/database.php
 user_guide
 .DS_Store
 .htaccess
+images/*
+image/*

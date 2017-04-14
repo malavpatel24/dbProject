@@ -30,7 +30,59 @@ class User extends CI_Model {
   //Returns the locations that the user with $id wants to visit
   public function get_user_locations($id)
   {
+    $q_string = "CALL Locations_By_User(?);"; //Change this to get all but password
+    $query = $this->db->query($q_string, array($id));
+    $rows = $query->result(); //Returns results as array of user objects
+    $query->next_result();
 
+    return $rows;
+  }
+
+  //Returns the locations that the user has ranked
+  public function get_user_rankings($id)
+  {
+    $q_string = "CALL Rankings_By_User(?);"; //Change this to get all but password
+    $query = $this->db->query($q_string, array($id));
+    $rows = $query->result(); //Returns results as array of user objects
+    $query->next_result();
+
+    return $rows;
+  }
+
+  //Returns the locations that the user has ranked up
+  public function get_user_ranked_up($id)
+  {
+    $q_string = "CALL Rankings_By_User_Up(?);"; //Change this to get all but password
+    $query = $this->db->query($q_string, array($id));
+    $rows = $query->result(); //Returns results as array of user objects
+    $query->next_result();
+
+    //We just want an array of ids
+    $values = [];
+    foreach($rows as $row)
+    {
+      $values[] = $row->location_id;
+    }
+
+    return $values;
+  }
+
+  //Returns the locations that the user has ranked up
+  public function get_user_ranked_down($id)
+  {
+    $q_string = "CALL Rankings_By_User_Down(?);"; //Change this to get all but password
+    $query = $this->db->query($q_string, array($id));
+    $rows = $query->result(); //Returns results as array of user objects
+    $query->next_result();
+
+    //We just want an array of ids
+    $values = [];
+    foreach($rows as $row)
+    {
+      $values[] = $row->location_id;
+    }
+
+    return $values;
   }
 
   //How do we want to implement this?

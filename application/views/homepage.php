@@ -14,23 +14,23 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="<?php echo base_url()?>image/first.jpg" alt="First slide" width="460" height="345">
+                        <img src="<?php echo site_url()?>image/first.jpg" alt="First slide" width="460" height="345">
                     </div>
 
                     <div class="item">
-                        <img src="<?php echo base_url()?>image/second.jpg" alt="Second slide" width="460" height="345">
+                        <img src="<?php echo site_url()?>image/second.jpg" alt="Second slide" width="460" height="345">
                     </div>
 
                     <div class="item">
-                        <img src="<?php echo base_url()?>image/third.jpg" alt="Third slide" width="460" height="345">
+                        <img src="<?php echo site_url()?>image/third.jpg" alt="Third slide" width="460" height="345">
                     </div>
 
                     <div class="item">
-                        <img src="<?php echo base_url()?>image/fourth.jpg" alt="Fourth slide" width="460" height="345">
+                        <img src="<?php echo site_url()?>image/fourth.jpg" alt="Fourth slide" width="460" height="345">
                     </div>
 
                     <div class="item">
-                        <img src="<?php echo base_url()?>image/fifth.jpg" alt="Fifth slide" width="460" height="345">
+                        <img src="<?php echo site_url()?>image/fifth.jpg" alt="Fifth slide" width="460" height="345">
                     </div>
                 </div>
 
