@@ -81,13 +81,60 @@ class Dashboard extends CI_Controller {
 		{
 			return ""; //Return empty result, as there were errors
 		}
+		else
+		{
+			$this->Location->add_user_ranking($user_id, $location_id, 1);
+		}
 	}
 
 	//This function is called by AJAX to change the ranking for a location
 	//The location id to change is a get parameter
 	public function decrement_rank()
 	{
+		$location_id = $this->input->get('id');
+		$user_id = $this->session->userdata('USER_ID');
 
+		if(!isset($location_id) || !isset($user_id))
+		{
+			return ""; //Return empty result, as there were errors
+		}
+		else
+		{
+			$this->Location->add_user_ranking($user_id, $location_id, -1);
+		}
+	}
+
+	//This function is called by AJAX to add a visited date to a location
+	public function save_date()
+	{
+		$location_id = $this->input->get('id');
+		$date = $this->input->get('date');
+		$user_id = $this->session->userdata('USER_ID');
+
+		if(!isset($location_id) || !isset($date) || !isset($user_id))
+		{
+			return ""; //Return empty result, as there were errors
+		}
+		else
+		{
+			$this->Location->add_visited_date($user_id, $location_id, $date);
+		}
+	}
+
+	//This function is called by AJAX to remove a visited date from a location
+	public function remove_date()
+	{
+		$location_id = $this->input->get('id');
+		$user_id = $this->session->userdata('USER_ID');
+
+		if(!isset($location_id) || !isset($user_id))
+		{
+			return ""; //Return empty result, as there were errors
+		}
+		else
+		{
+			$this->Location->remove_visited_date($user_id, $location_id);
+		}
 	}
 
 	public function location()

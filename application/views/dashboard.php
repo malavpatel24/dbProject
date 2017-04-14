@@ -1,3 +1,4 @@
+<script>var BASE_URL = "<?php echo site_url('dashboard')?>"</script>
 <script src="<?php echo base_url('js/user_dashboard.js'); ?>"></script>
 <div class="row">
   <div class="col-xs-12">
@@ -29,7 +30,7 @@
               <span style="margin-left:10px; <?php if(in_array($location->id, $ranks_up)){echo "color:green;";} ?>" data-id="<?php echo $location->id; ?>" class="glyphicon glyphicon-plus plus"></span>
               <span style="margin-left:10px; <?php if(in_array($location->id, $ranks_down)){echo "color:red;";} ?>" data-id="<?php echo $location->id; ?>" class="glyphicon glyphicon-minus minus"></span>
             </td>
-            <td><input type="date" value="<?php echo $location->date_visited ?>"></input></td>
+            <td><input type="date" class="date" data-id="<?php echo $location->id; ?>" value="<?php echo $location->date_visited ?>"></input><span class="visited <?php if($location->date_visited != '') "glyphicon glyphicon-ok" ?>" style="color:green;"></span></td>
             <td><?php echo $location->order ?></td>
           </tr>
         <?php endforeach; ?>

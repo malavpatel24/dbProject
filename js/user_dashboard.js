@@ -21,6 +21,8 @@ $(document).ready(function() {
       {
         $this.siblings(".ranking").text( parseInt(current_value) + 1)
       }
+
+      increment_ajax(id)
     }
   })
 
@@ -45,15 +47,79 @@ $(document).ready(function() {
       {
         $this.siblings(".ranking").text( current_value - 1)
       }
+
+      decrement_ajax(id)
     }
+  })
+
+  $('.date').on('change', function(){
+    $this = $(this)
+    id = $this.data('id')
+    value = $this.val()
+    alert(value)
+    if(value != "")
+    {
+      $this.siblings(".visited").addClass('glyphicon glyphicon-ok')
+      save_date(id, value)
+    }
+    else
+    {
+      $this.siblings(".visited").removeClass('glyphicon glyphicon-ok')
+      remove_date(id)
+    }
+
   })
 });
 
 
-$.ajax(this.href, {
-  success: function(data) {
-  },
-  error: function() {
-     $('#notification-bar').text('An error occurred');
-  }
-});
+function increment_ajax(location_id)
+{
+    $.ajax({
+    url: BASE_URL + "/increment_rank",
+    cache: false,
+    data: {"id": location_id},
+    success: function(){
+    },
+    error: function() {
+    }
+  });
+}
+
+function save_date(location_id, date)
+{
+    $.ajax({
+    url: BASE_URL + "/save_date",
+    cache: false,
+    data: {"id": location_id, "date": date},
+    success: function(){
+    },
+    error: function() {
+    }
+  });
+}
+
+function remove_date(location_id)
+{
+    $.ajax({
+    url: BASE_URL + "/remove_date",
+    cache: false,
+    data: {"id": location_id},
+    success: function(){
+    },
+    error: function() {
+    }
+  });
+}
+
+function decrement_ajax(location_id)
+{
+    $.ajax({
+    url: BASE_URL + "/decrement_rank",
+    cache: false,
+    data: {"id": location_id},
+    success: function(){
+    },
+    error: function() {
+    }
+  });
+}
