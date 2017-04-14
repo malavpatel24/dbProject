@@ -5,3 +5,4 @@ user_guide
 .htaccess
 images/*
 image/*
+uploaded_images/*

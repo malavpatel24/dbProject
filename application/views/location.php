@@ -4,18 +4,16 @@
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-                <li data-target="#myCarousel" data-slide-to="4"></li>
+                <?php foreach($pictures as $key => $value): ?>
+                  <li data-target="#myCarousel" data-slide-to="<?php echo $key?>" <?php if($key == 0) echo "class='active'" ?>></li>
+                <?php endforeach; ?>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <?php foreach ($pictures as $picture): ?>
                     <div class="item active">
-                        <img src="<?php echo base_url('images/' . $picture->pic_location)?>" alt="First slide" width="460" height="345">
+                        <img src="<?php echo base_url('uploaded_images/' . $picture->pic_location)?>" alt="First slide" width="460" height="345">
                     </div>
                 <?php endforeach; ?>
 

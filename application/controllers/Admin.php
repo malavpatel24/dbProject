@@ -60,11 +60,19 @@ class Admin extends CI_Controller {
 		$location->cost = $this->input->post('cost');
 
 		if(!$this->Location->create_location($location))
+		{
+			$this->load->view('header');
 			$this->load->view('components/add_location', ['errors' => ['There was an error creating this location.']]);
+			$this->load->view('footer');
+		}
 
 		$error = $this->save_image($location->id);
 		if($error != '') //Error if $error not empty string
+		{
+			$this->load->view('header'); //Should redirect to edit page
 			$this->load->view('components/add_location', ['errors' => ['There was an error uploading the attached image: ' . $error]]);
+			$this->load->view('footer');
+		}
 		else
 			redirect(site_url() . 'users/login'); //Redirect to admin dashboard when made
 	}
@@ -73,11 +81,11 @@ class Admin extends CI_Controller {
 	//	empty string on success
 	private function save_image($loc_id)
 	{
-		$config['upload_path'] = './images/';
+		$config['upload_path'] = './uploaded_images/';
     $config['allowed_types'] = 'gif|jpg|png';
     $config['max_size'] = 1000;
-    $config['max_width'] = 1080;
-    $config['max_height'] = 1080;
+    $config['max_width'] = 1080000;
+    $config['max_height'] = 10800000;
 
 		$config['file_name'] = $loc_id . 'image.png'; //This may need to be changed for multiple images
 
