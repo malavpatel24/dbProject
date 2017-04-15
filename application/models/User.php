@@ -85,12 +85,6 @@ class User extends CI_Model {
     return $values;
   }
 
-  //How do we want to implement this?
-  public function search_users()
-  {
-
-  }
-
   //Add a location to a user's list
   public function new_Order($user_id)
   {
@@ -151,8 +145,8 @@ class User extends CI_Model {
     if(isset($rows[0]))
       return false; //Email exists in database
 
-    $q_string = "INSERT INTO `locBucket`.`users` (`name`, `email`, `password`) VALUES (?, ?, ?);";
-    $values = [$userObject->name, $userObject->email, password_hash($userObject->password, PASSWORD_DEFAULT)];
+    $q_string = "INSERT INTO `locBucket`.`users` (`name`, `email`, `password`, 'role_id') VALUES (?, ?, ?, ?);";
+    $values = [$userObject->name, $userObject->email, password_hash($userObject->password, PASSWORD_DEFAULT), 1];
     $query = $this->db->query($q_string, $values); //Insert
 
     return true;

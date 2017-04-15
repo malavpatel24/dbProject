@@ -25,6 +25,13 @@ class Dashboard extends CI_Controller {
 		//Check that the user is logged in here. If not, redirect to login
 		$this->load->library('session'); //Will need session to do login
 		$this->load->model(['User', 'Location', 'Pictures', 'Type']);
+
+		//If user not logged in, redirect
+		$user_id = $this->session->userdata('USER_ID');
+		if(!isset($user_id))
+		{
+			redirect(site_url() . 'users/login');
+		}
 	}
 
 	//Displays this users dashboard

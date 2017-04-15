@@ -24,20 +24,32 @@ class Admin extends CI_Controller {
 		parent::__construct();
 		//Check that the user is logged in and an admin here. If not, redirect to login
 		$this->load->library('session'); //Will need session to do login
-		$this->load->model(['Location', 'Pictures', 'Type']);
+		$this->load->model(['Location', 'Pictures', 'Type', 'User']);
+
+		//If user not logged in, redirect. Need to check for user role as well
+		$user_id = $this->session->userdata('USER_ID');
+		$user_role = $this->session->userdata('USER_ROLE');
+		if(!isset($user_id) || $user_role == 1)
+		{
+			redirect(site_url() . 'users/login');
+		}
   }
 
 	//Displays this admins dashboard
 	public function index()
 	{
-		$this->load->view('welcome_message');
-	}
+		$locations = $this->Location->get_locations();
+		$types_by_id = $this->Type->get_types_by_id();
 
-	//Displays list of all locations
-	//If a specific location is specified, location can be edited
-	public function locations()
-	{
-		$this->load->view('welcome_message');
+		//Now that we have the locations, lets get each locations rating
+		foreach($locations as $location)
+			$location->ranking = $this->Location->get_location_ranking($location->id);
+
+		$values = ['locations' => $locations, 'types' => $types_by_id];
+
+		$this->load->view('header');
+		$this->load->view('admin_locations', $values);
+		$this->load->view('footer');
 	}
 
 	//Displays list of all locations
@@ -76,7 +88,7 @@ class Admin extends CI_Controller {
 			$this->load->view('footer');
 		}
 		else
-			redirect(site_url() . 'users/login'); //Redirect to admin dashboard when made
+			redirect(site_url('admin')); //Redirect to admin dashboard when made
 	}
 
 	//This function saves the image uploaded. Note that it returns the error on fail, and an
@@ -89,7 +101,7 @@ class Admin extends CI_Controller {
     $config['max_width'] = 1080000;
     $config['max_height'] = 10800000;
 
-		$config['file_name'] = $loc_id . 'image.png'; //This may need to be changed for multiple images
+		$config['file_name'] = $loc_id . 'image'; //This may need to be changed for multiple images
 
     $this->load->library('upload', $config);
 
