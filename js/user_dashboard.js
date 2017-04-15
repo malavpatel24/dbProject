@@ -56,7 +56,6 @@ $(document).ready(function() {
     $this = $(this)
     id = $this.data('id')
     value = $this.val()
-    alert(value)
     if(value != "")
     {
       $this.siblings(".visited").addClass('glyphicon glyphicon-ok')
@@ -67,14 +66,81 @@ $(document).ready(function() {
       $this.siblings(".visited").removeClass('glyphicon glyphicon-ok')
       remove_date(id)
     }
+  })
 
+  $('.up').on('click', function(){
+    $this = $(this)
+    $tr = $this.parent().parent() //The tr of this location
+    $above = $tr.prev() //The tr of the location above
+    swap_locations($above, $tr)
+
+    id = $this.data('id')
+  })
+
+  $('.down').on('click', function(){
+    $this = $(this)
+    $tr = $this.parent().parent() //The tr of this location
+    $below = $tr.next() //The tr of the location above
+    swap_locations($tr, $below)
+
+    id = $this.data('id')
+  })
+
+  $('.add').on('click', function(){
+    $this = $(this)
+    location_id = $this.data('id')
+
+    add_location_to_dash(location_id)
+  })
+
+  $('.delete').on('click', function(){
+    $this = $(this)
+    location_id = $this.data('id')
+    $tr = $this.parent().parent() //The tr of this location
+
+    //Swap until its on bottom
+    $next = $tr.next()
+    while(typeof $next.html() !== "undefined")
+    {
+      swap_locations($tr, $next)
+      $next = $next.next()
+    }
+
+    $tr.remove()
+
+    remove_location_from_dash(location_id)
   })
 });
 
+function add_location_to_dash(location_id)
+{
+  $.ajax({
+    url: BASE_URL + "/add_location",
+    cache: false,
+    data: {"id": location_id},
+    success: function(){
+    },
+    error: function() {
+    }
+  });
+}
+
+function remove_location_from_dash($id)
+{
+  $.ajax({
+    url: BASE_URL + "/remove_location",
+    cache: false,
+    data: {"id": location_id},
+    success: function(){
+    },
+    error: function() {
+    }
+  });
+}
 
 function increment_ajax(location_id)
 {
-    $.ajax({
+  $.ajax({
     url: BASE_URL + "/increment_rank",
     cache: false,
     data: {"id": location_id},
@@ -85,9 +151,42 @@ function increment_ajax(location_id)
   });
 }
 
+function swap_locations($above, $below)
+{
+  above_order = $above.find(".order").text()
+  below_order = $below.find(".order").text()
+
+  //Change text
+  if(above_order != "" && below_order != "" )
+  {
+    $below.find(".order").text(above_order)
+    $above.find(".order").text(below_order)
+  }
+
+  //Swap them
+  //Note that if above or below is empty object, no action is taking by function
+  $above.insertAfter($below)
+
+  above_id = $above.data('id')
+  below_id = $below.data('id')
+
+  if(above_id != "" && below_id != "" )
+  {
+    $.ajax({
+      url: BASE_URL + "/swap_order",
+      cache: false,
+      data: {"above_id": above_id, "below_id": below_id },
+      success: function(){
+      },
+      error: function() {
+      }
+    });
+  }
+}
+
 function save_date(location_id, date)
 {
-    $.ajax({
+  $.ajax({
     url: BASE_URL + "/save_date",
     cache: false,
     data: {"id": location_id, "date": date},
@@ -100,7 +199,7 @@ function save_date(location_id, date)
 
 function remove_date(location_id)
 {
-    $.ajax({
+  $.ajax({
     url: BASE_URL + "/remove_date",
     cache: false,
     data: {"id": location_id},
@@ -113,7 +212,7 @@ function remove_date(location_id)
 
 function decrement_ajax(location_id)
 {
-    $.ajax({
+  $.ajax({
     url: BASE_URL + "/decrement_rank",
     cache: false,
     data: {"id": location_id},

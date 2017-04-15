@@ -92,6 +92,23 @@ class User extends CI_Model {
   }
 
   //Add a location to a user's list
+  public function new_Order($user_id)
+  {
+    $q_string = "SELECT MAX(ul.order) as max
+      FROM user_locations ul
+      WHERE ul.user_id = ?
+      GROUP BY ul.user_id;"; //Change this to get all but password
+    $query = $this->db->query($q_string, array($user_id));
+
+    $rows = $query->result(); //Returns results
+
+    if(isset($rows[0]))
+      return ((int) $rows[0]->max) + 1 ; //User has a order. Return this + 1
+    else
+      return 1;
+  }
+
+  //Add a location to a user's list
   public function add_user_location($user_id, $location_id, $order)
   {
     $q_string = "INSERT INTO `locBucket`.`user_locations` (`user_id`, `location_id`, `order`) VALUES (?, ?, ?);"; //Change this to get all but password

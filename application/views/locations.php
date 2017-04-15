@@ -13,8 +13,15 @@
 </style>
 <div class="row">
   <div class="col-xs-12">
-    <p>Welcome to your user dashboard! Here you can see all of the locations in your bucket list.</p>
-    <a href="<?php echo site_url('dashboard/locations') ?>">Click here to find some new locations to add to your bucket list!</a>
+    <p>
+      Below are all of the locations currently available to be added to your
+      bucket list. We are constantly adding fun new locations, and our photographers
+      keep our images up to date, so check in often for all the latest locations!
+    </p>
+    <p>
+      Know a great location we missed? Want to put your photography skills to the test?
+      Contact us to let us know! Admin emails can be found on the Contact page.
+    </p>
   </div>
 </div>
 <div class="row">
@@ -22,19 +29,15 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Order</th>
           <th>Location</th>
           <th>Type</th>
           <th>Rate</th>
-          <th>Date Visited</th>
-          <th>Change Order</th>
-          <th>Delete</th>
+          <th>Add this Location!</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach($locations as $location): ?>
           <tr data-id="<?php echo $location->id; ?>">
-            <td class="order"><?php echo $location->order ?></td>
             <td><a href="<?php echo site_url("dashboard/location?id=" . $location->id) ?>"><?php echo $location->name ?></a></td>
             <td><?php echo $types[$location->type_id] ?></td>
             <td>
@@ -43,11 +46,8 @@
               <span style="margin-left:10px; <?php if(in_array($location->id, $ranks_down)){echo "color:red;";} ?>" data-id="<?php echo $location->id; ?>" class="glyphicon glyphicon-minus minus"></span>
             </td>
             <td>
-              <input type="date" class="date" data-id="<?php echo $location->id; ?>" value="<?php echo $location->date_visited ?>"></input>
-              <span class="visited <?php if($location->date_visited != '') echo "glyphicon glyphicon-ok" ?>" style="color:green;"></span>
+              <span style="margin-left:10px;color:green;" data-id="<?php echo $location->id; ?>" class="glyphicon glyphicon-plus add"></span>
             </td>
-            <td><span data-id="<?php echo $location->id; ?>" class="glyphicon glyphicon-arrow-up up"></span><span data-id="<?php echo $location->id; ?>" class="glyphicon glyphicon-arrow-down down" style="margin-left:10px;"></span></td>
-            <td><span data-id="<?php echo $location->id; ?>" class="glyphicon glyphicon-remove-circle delete"></span></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

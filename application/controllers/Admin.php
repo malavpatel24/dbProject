@@ -24,7 +24,7 @@ class Admin extends CI_Controller {
 		parent::__construct();
 		//Check that the user is logged in and an admin here. If not, redirect to login
 		$this->load->library('session'); //Will need session to do login
-		$this->load->model(['Location', 'Pictures']);
+		$this->load->model(['Location', 'Pictures', 'Type']);
   }
 
 	//Displays this admins dashboard
@@ -44,8 +44,10 @@ class Admin extends CI_Controller {
 	//If a specific location is specified, location can be edited
 	public function add_location()
 	{
+		$types = $this->Type->get_types_by_id();
+
 		$this->load->view('header');
-		$this->load->view('components/add_location');
+		$this->load->view('components/add_location', ['types' => $types]);
 		$this->load->view('footer');
 	}
 

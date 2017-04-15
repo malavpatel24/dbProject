@@ -20,8 +20,9 @@
       <div class="form-group">
         <label>Location Type</label>
         <select class="form-control" name="type" placeholder="Select a type" required>
-          <option value="ECHO ID HERE"> ECHO TYPES HERE </option>
-          <option value="1"> City </option>
+          <?php foreach($types as $id => $type): ?>
+            <option value="<?php echo $id ?>"> <?php echo $type ?> </option>
+          <?php endforeach; ?>
         </select>
       </div>
     </div>

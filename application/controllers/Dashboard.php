@@ -54,8 +54,20 @@ class Dashboard extends CI_Controller {
 	{
 		$locations = $this->Location->get_locations();
 
+		$types_by_id = $this->Type->get_types_by_id();
+
+		//Now that we have the locations, lets get each locations rating
+		foreach($locations as $location)
+			$location->ranking = $this->Location->get_location_ranking($location->id);
+
+		//We will also want to know each locations the user has ranked
+		$ranks_up = $this->User->get_user_ranked_up($this->session->userdata('USER_ID'));
+		$ranks_down = $this->User->get_user_ranked_down($this->session->userdata('USER_ID'));
+
+		$values = ['locations' => $locations, 'ranks_up' => $ranks_up, 'ranks_down' => $ranks_down, 'types' => $types_by_id];
+
 		$this->load->view('header');
-		$this->load->view('components/locations_table', ['locations' => $locations]);
+		$this->load->view('locations', $values);
 		$this->load->view('footer');
 	}
 
@@ -68,6 +80,23 @@ class Dashboard extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('components/users_table', ['users' => $users]);
 		$this->load->view('footer');
+	}
+
+	//Used through AJAX. Adds a location to a users list
+	public function add_location()
+	{
+		$location_id = $this->input->get('id');
+		$user_id = $this->session->userdata('USER_ID');
+
+		if(!isset($location_id) || !isset($user_id))
+		{
+			return ""; //Return empty result, as there were errors
+		}
+		else
+		{
+			$newOrder = $this->User->new_Order($user_id);
+			$this->User->add_user_location($user_id, $location_id, $newOrder);
+		}
 	}
 
 	//This function is called by AJAX to change the ranking for a location
@@ -104,6 +133,24 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
+	//This function is called by AJAX to change the ranking for a location
+	//The location id to change is a get parameter
+	public function swap_order()
+	{
+		$above_id = $this->input->get('above_id');
+		$below_id = $this->input->get('below_id');
+		$user_id = $this->session->userdata('USER_ID');
+
+		if(!isset($above_id) || !isset($below_id) || !isset($user_id))
+		{
+			return ""; //Return empty result, as there were errors
+		}
+		else
+		{
+			$this->Location->swap_locations_order($user_id, $above_id, $below_id);
+		}
+	}
+
 	//This function is called by AJAX to add a visited date to a location
 	public function save_date()
 	{
@@ -134,6 +181,22 @@ class Dashboard extends CI_Controller {
 		else
 		{
 			$this->Location->remove_visited_date($user_id, $location_id);
+		}
+	}
+
+	//This function is called by AJAX to remove a location
+	public function remove_location()
+	{
+		$location_id = $this->input->get('id');
+		$user_id = $this->session->userdata('USER_ID');
+
+		if(!isset($location_id) || !isset($user_id))
+		{
+			return ""; //Return empty result, as there were errors
+		}
+		else
+		{
+			$this->Location->remove_user_location($user_id, $location_id);
 		}
 	}
 

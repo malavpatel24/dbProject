@@ -11,7 +11,7 @@ class Location extends CI_Model {
   //Returns a list of all locations
   public function get_locations()
   {
-     $q_string = "SELECT * FROM locations l;";
+     $q_string = "SELECT * FROM locations l ORDER BY l.name;";
      $query = $this->db->query($q_string);
      $rows = $query->result('Location');
 
@@ -40,6 +40,14 @@ class Location extends CI_Model {
         return $rows[0]->rating;
       else
         return 0;
+  }
+
+  //Returns a location ranking specified by id
+  public function swap_locations_order($user_id, $above_id, $below_id)
+  {
+      $q_string = "CALL Swap_Locations_Order(?, ?, ?)"; //Change this to get all but password
+      $query = $this->db->query($q_string, array($user_id, $above_id, $below_id));
+      die("success");
   }
 
   //Returns the images for the location specified
@@ -104,6 +112,13 @@ class Location extends CI_Model {
   public function remove_visited_date($user_id, $location_id)
   {
     $q_string = "UPDATE user_locations SET date_visited=NULL WHERE user_id=? and location_id=?;";
+    $query = $this->db->query($q_string, array($user_id, $location_id));
+  }
+
+  //Removes a user location
+  public function remove_user_location($user_id, $location_id)
+  {
+    $q_string = "DELETE FROM user_locations WHERE user_id=? and location_id=?;";
     $query = $this->db->query($q_string, array($user_id, $location_id));
   }
 

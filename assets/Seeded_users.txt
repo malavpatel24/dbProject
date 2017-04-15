@@ -1,0 +1,8 @@
+User		Password	Role
+Kevin@kevin.com	1234		Admin
+Chris@chris.com	4321		Admin
+Malav@malav.com	3412		Admin
+Johnny@aol.com	1111		User
+Mary@aol.com	2222		Photographer
+Susie@aol.com	3333		User
+Mark@aol.com	4444		Photographer
