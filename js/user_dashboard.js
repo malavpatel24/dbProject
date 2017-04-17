@@ -89,6 +89,7 @@ $(document).ready(function() {
   $('.add').on('click', function(){
     $this = $(this)
     location_id = $this.data('id')
+    $this.replaceWith("<span class='glyphicon glyphicon-ok' style='color:green;'></span>")
 
     add_location_to_dash(location_id)
   })
