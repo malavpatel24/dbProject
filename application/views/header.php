@@ -8,7 +8,7 @@
         <meta name="author" content="">
         <link rel="icon" href="../../favicon.ico">
 
-        <title>Homepage</title>
+        <title>Location Bucket-List</title>
 
         <!-- Latest compiled and minified CSS -->
 
@@ -46,8 +46,8 @@
                     <a class="navbar-brand" href="<?php echo site_url()?>">Location Bucket-List</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="<?php echo site_url();?>welcome/about")>About</a></li>
+                    <li><a href="<?php echo site_url();?>welcome/contact">Contact</a></li>
                 </ul>
                 <?php if (!$this->session->userdata('USER_NAME')): ?>
                     <ul class="nav navbar-nav navbar-right">

@@ -1,11 +1,11 @@
 
-    <div style="margin-top:100px;" class="container">
+    <div style="margin-top:20px;" class="container">
         <br>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <?php foreach($pictures as $key => $value): ?>
-                  <li data-target="#myCarousel" data-slide-to="<?php echo $key?>" <?php if($key == 0) echo "class='active'" ?>></li>
+                    <li data-target="#myCarousel" data-slide-to="<?php echo $key?>" <?php if($key == 0) echo "class='active'" ?>></li>
                 <?php endforeach; ?>
             </ol>
 
@@ -37,9 +37,9 @@
     <div style="margin-top:80px;" class="container">
         <div class="container">
 
-            <p>Name: <?php echo $location->name; ?></p>
-            <p>Type ID: <?php echo $location->type_id; ?></p>
-            <p>Description: <?php echo $location->description; ?></p>
-            <p>Cost : <?php echo $location->cost; ?></p>
+            <h1 style="text-align:center;"><?php echo $location->name; ?></h1>
+            <h3 style="text-align:center;"><?php echo $location->type_id; ?></h3>
+            <p><?php echo $location->description; ?></p>
+            <p><?php echo $location->cost; ?></p>
         </div>
     </div>
