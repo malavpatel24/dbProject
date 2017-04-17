@@ -13,6 +13,7 @@
 </style>
 <div class="row">
   <div class="col-xs-12">
+    <h1>Locations</h1>
     <p>
       Below are all of the locations currently available to be added to your
       bucket list. We are constantly adding fun new locations, and our photographers
@@ -24,6 +25,27 @@
     </p>
   </div>
 </div>
+<form method="get" action="<?php echo site_url("dashboard/locations") ?>">
+  <div class="row" style="margin-bottom:20px;">
+    <div class="col-xs-3">
+      <label>Location Name</label>
+      <input type="text" class="form-control" name="name" >
+    </div>
+    <div class="col-xs-3">
+      <label>Location Type</label>
+      <select class="form-control" name="type" placeholder="Select a type">
+        <option value=""></option>
+        <?php foreach($types as $id => $type): ?>
+          <option value="<?php echo $id ?>"> <?php echo $type ?> </option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+    <div class="col-xs-3">
+      <label></label><br>
+      <button type="submit" style="" class="btn btn-default">Search</button>
+    </div>
+  </div>
+</form>
 <div class="row">
   <div class="col-xs-12">
     <table class="table">

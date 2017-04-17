@@ -8,20 +8,21 @@
     <?php endif; ?>
   </div>
 </div>
-<form method="post" action="<?php echo site_url() ?>admin/do_edit_location" enctype="multipart/form-data">
+<form method="post" action="<?php echo site_url() ?>admin/do_edit_location?id=<?php echo $location->id;?>" enctype="multipart/form-data">
   <div class="row">
     <div class="col-xs-3">
       <div class="form-group">
         <label>Location Name</label>
-        <input type="text" class="form-control" name="locationName" value="<?php echo $location->name; ?>" required>
+        <input type="text" class="form-control" name="locationName" value="<?php echo $location->name; ?>" required <?php if($disabled) echo "disabled" ?>>
       </div>
     </div>
     <div class="col-xs-3">
       <div class="form-group">
         <label>Location Type</label>
-        <select class="form-control" name="type" placeholder="<?php echo $location->type_id; ?>" required>
-          <option value="ECHO ID HERE"> ECHO TYPES HERE </option>
-          <option value="1"> City </option>
+        <select class="form-control" name="type" placeholder="Select a type" required <?php if($disabled) echo "disabled" ?>>
+          <?php foreach($types as $id => $type): ?>
+            <option value="<?php echo $id ?>" <?php if($location->type_id == $id) echo "selected" ?>> <?php echo $type ?> </option>
+          <?php endforeach; ?>
         </select>
       </div>
     </div>
@@ -30,7 +31,7 @@
     <div class="col-xs-6">
       <div class="form-group">
         <label>Description</label>
-        <textarea class="form-control" name="description" required><?php echo $location->description; ?></textarea>
+        <textarea class="form-control" name="description" required <?php if($disabled) echo "disabled" ?>><?php echo $location->description; ?></textarea>
       </div>
     </div>
   </div>
@@ -38,7 +39,7 @@
     <div class="col-xs-3">
       <div class="form-group">
         <label>Describe average cost for a visit</label>
-        <input type="text" class="form-control" name = "cost" value="<?php echo $location->cost; ?>" required></input>
+        <input type="text" class="form-control" name = "cost" value="<?php echo $location->cost; ?>" required <?php if($disabled) echo "disabled" ?>></input>
       </div>
     </div>
     <div class="col-xs-3">

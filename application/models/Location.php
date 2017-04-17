@@ -19,6 +19,15 @@ class Location extends CI_Model {
   }
 
   //Returns a location specified by id
+  public function edit_location($location)
+  {
+     $q_string = "UPDATE `locBucket`.`locations` SET `name` = ?, `description` = ?, `type_id` = ?, `cost` = ? WHERE `id` = ?;";
+     $query = $this->db->query($q_string, array($location->name, $location->description, $location->type_id, $location->cost, $location->id));
+
+     return True;
+  }
+
+  //Returns a location specified by id
   public function get_location($id)
   {
      $q_string = "SELECT * FROM locations WHERE id = ?;";
@@ -66,8 +75,9 @@ class Location extends CI_Model {
      }else if($name == NULL){
         return $this->search_by_type($type);
      }else{
+        $name = "%". $name . "%";
         $q_string = "SELECT * FROM locations l
-        WHERE name = ? AND type_id = ?";
+        WHERE name LIKE ? AND type_id = ?";
         $query = $this->db->query($q_string,array($name, $type));
         $rows = $query->result('Location');
         return $rows;

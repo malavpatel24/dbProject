@@ -65,6 +65,14 @@ class Admin extends CI_Controller {
 
 	public function edit_location()
 	{
+		$user_role = $this->session->userdata('USER_ROLE');
+		$disabled = False;
+
+		if($user_role == 2) //This is a photographer
+		{
+			$disabled = True;
+		}
+
 		$id = $this->input->get('id');
 
 		$locations = $this->Location->get_location($id);
@@ -74,7 +82,9 @@ class Admin extends CI_Controller {
 			redirect(site_url('admin'));
 		}
 
-		$values = ['location' => $locations[0]];
+		$types = $this->Type->get_types_by_id();
+
+		$values = ['location' => $locations[0], 'types' => $types, 'disabled' => $disabled];
 
 		$this->load->view('header');
 		$this->load->view('components/edit_location', $values);
@@ -120,6 +130,8 @@ class Admin extends CI_Controller {
 			redirect(site_url('admin'));
 		}
 
+		$types = $this->Type->get_types_by_id();
+
 		$location = $locations[0];
 
 		$location->name = $this->input->post('locationName');
@@ -127,10 +139,10 @@ class Admin extends CI_Controller {
 		$location->type_id = $this->input->post('type');
 		$location->cost = $this->input->post('cost');
 
-		if(!$this->Location->create_location($location))
+		if(!$this->Location->edit_location($location))
 		{
 			$this->load->view('header');
-			$this->load->view('components/add_location', ['errors' => ['There was an error creating this location.']]);
+			$this->load->view('components/edit_location', ['errors' => ['There was an error editing this location.'], 'location' => $location, 'types' => $types]);
 			$this->load->view('footer');
 		}
 
@@ -138,23 +150,23 @@ class Admin extends CI_Controller {
 		if($error != '') //Error if $error not empty string
 		{
 			$this->load->view('header'); //Should redirect to edit page
-			$this->load->view('components/add_location', ['errors' => ['There was an error uploading the attached image: ' . $error]]);
+			$this->load->view('components/edit_location', ['errors' => ['There was an error uploading the attached image: ' . $error], 'location' => $location, 'types' => $types]);
 			$this->load->view('footer');
 		}
 		else
-			redirect(site_url() . 'users/login'); //Redirect to admin dashboard when made
+			redirect(site_url() . 'admin'); //Redirect to admin dashboard when made
 	}
 
 	//This function saves the image uploaded. Note that it returns the error on fail, and an
 	//	empty string on success
 	private function save_image($loc_id)
 	{
-		if(empty($_FILES['userfile']['image'])) {
+		if(empty($_FILES['image']['name'])) {
 			return '';
 		}
-		
+
 		$config['upload_path'] = './uploaded_images/';
-    $config['allowed_types'] = 'gif|jpg|png';
+    $config['allowed_types'] = 'gif|jpg|png|jpeg';
     $config['max_size'] = 1000;
     $config['max_width'] = 1080000;
     $config['max_height'] = 10800000;

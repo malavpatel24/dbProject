@@ -13,6 +13,7 @@
 </style>
 <div class="row">
   <div class="col-xs-12">
+    <h1>Dashboard</h1>
     <p>Welcome to your user dashboard! Here you can see all of the locations in your bucket list.</p>
     <a href="<?php echo site_url('dashboard/locations') ?>">Click here to find some new locations to add to your bucket list!</a>
   </div>

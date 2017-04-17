@@ -212,9 +212,9 @@ class Dashboard extends CI_Controller {
 
 	public function location()
 	{
-		$this->load->model('Location');
-		$this->load->model('Pictures');
 		$id = $this->input->get('id');
+
+		$types = $this->Type->get_types_by_id();
 
 		$locations = $this->Location->get_location($id);
 		$pictures = $this->Pictures->get_picture($id);
@@ -224,7 +224,7 @@ class Dashboard extends CI_Controller {
 			redirect(site_url('Dashboard/locations'));
 		}
 
-		$values = ['location' => $locations[0], 'pictures' => $pictures];
+		$values = ['location' => $locations[0], 'pictures' => $pictures, 'types' =>$types];
 
 		$this->load->view("header");
 		$this->load->view("location", $values);

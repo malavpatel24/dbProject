@@ -11,6 +11,7 @@
 </style>
 <div class="row">
   <div class="col-xs-12">
+    <h1>Admin Dashboard</h1>
     <p>Welcome to the admin dashboard! Click on a location to edit it or upload a new image.</p>
     <a href="<?php echo site_url("admin/add-location") ?>">Click here to add a new location</a>
   </div>

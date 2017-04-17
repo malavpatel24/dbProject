@@ -11,13 +11,11 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <?php foreach ($pictures as $picture): ?>
-                    <div class="item active">
+                <?php foreach ($pictures as $key => $picture): ?>
+                    <div class="item <?php if($key == 0) echo "active"?>">
                         <img src="<?php echo base_url('uploaded_images/' . $picture->pic_location)?>" alt="First slide" width="460" height="345">
                     </div>
                 <?php endforeach; ?>
-
-
             </div>
 
             <!-- Left and right controls -->
@@ -38,8 +36,8 @@
         <div class="container">
 
             <h1 style="text-align:center;"><?php echo $location->name; ?></h1>
-            <h3 style="text-align:center;"><?php echo $location->type_id; ?></h3>
+            <h3 style="text-align:center;"><?php echo $types[$location->type_id]; ?></h3>
             <p><?php echo $location->description; ?></p>
-            <p><?php echo $location->cost; ?></p>
+            <p><b><?php echo $location->cost; ?></b></p>
         </div>
     </div>
