@@ -63,6 +63,24 @@ class Admin extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	public function edit_location()
+	{
+		$id = $this->input->get('id');
+
+		$locations = $this->Location->get_location($id);
+
+		if (!isset($locations[0])) {
+
+			redirect(site_url('admin'));
+		}
+
+		$values = ['location' => $locations[0]];
+
+		$this->load->view('header');
+		$this->load->view('components/edit_location', $values);
+		$this->load->view('footer');
+	}
+
 	//Performs the registration given in register()
 	public function do_add_location()
 	{
@@ -91,10 +109,50 @@ class Admin extends CI_Controller {
 			redirect(site_url('admin')); //Redirect to admin dashboard when made
 	}
 
+	public function do_edit_location()
+	{
+		$id = $this->input->get('id');
+
+		$locations = $this->Location->get_location($id);
+
+		if (!isset($locations[0])) {
+
+			redirect(site_url('admin'));
+		}
+
+		$location = $locations[0];
+
+		$location->name = $this->input->post('locationName');
+		$location->description = $this->input->post('description');
+		$location->type_id = $this->input->post('type');
+		$location->cost = $this->input->post('cost');
+
+		if(!$this->Location->create_location($location))
+		{
+			$this->load->view('header');
+			$this->load->view('components/add_location', ['errors' => ['There was an error creating this location.']]);
+			$this->load->view('footer');
+		}
+
+		$error = $this->save_image($location->id);
+		if($error != '') //Error if $error not empty string
+		{
+			$this->load->view('header'); //Should redirect to edit page
+			$this->load->view('components/add_location', ['errors' => ['There was an error uploading the attached image: ' . $error]]);
+			$this->load->view('footer');
+		}
+		else
+			redirect(site_url() . 'users/login'); //Redirect to admin dashboard when made
+	}
+
 	//This function saves the image uploaded. Note that it returns the error on fail, and an
 	//	empty string on success
 	private function save_image($loc_id)
 	{
+		if(empty($_FILES['userfile']['image'])) {
+			return '';
+		}
+		
 		$config['upload_path'] = './uploaded_images/';
     $config['allowed_types'] = 'gif|jpg|png';
     $config['max_size'] = 1000;
@@ -128,4 +186,6 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+
+
 }

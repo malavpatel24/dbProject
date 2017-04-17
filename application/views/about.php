@@ -1,4 +1,5 @@
-<div style="margin-top:80px; text-align: center" ; class="container">
+
+<div style="margin-top:20px; text-align: center" ; class="container">
     <section>
         <div class="about">
             <h2> About </h2>
