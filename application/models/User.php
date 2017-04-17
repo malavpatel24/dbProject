@@ -145,7 +145,7 @@ class User extends CI_Model {
     if(isset($rows[0]))
       return false; //Email exists in database
 
-    $q_string = "INSERT INTO `locBucket`.`users` (`name`, `email`, `password`, 'role_id') VALUES (?, ?, ?, ?);";
+    $q_string = "INSERT INTO `locBucket`.`users` (`name`, `email`, `password`, `role_id`) VALUES (?, ?, ?, ?);";
     $values = [$userObject->name, $userObject->email, password_hash($userObject->password, PASSWORD_DEFAULT), 1];
     $query = $this->db->query($q_string, $values); //Insert
 

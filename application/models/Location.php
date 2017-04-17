@@ -60,30 +60,39 @@ class Location extends CI_Model {
      return $rows;
   }
 
-  public function search_locations($name,$cost) {
-     if(cost == NULL){
-        search_by_name(name);
-     }else if( name == NULL){
-        search_by_cost(cost);
+  public function search_locations($name, $type) {
+     if($type == NULL){
+        return $this->search_by_name($name);
+     }else if($name == NULL){
+        return $this->search_by_type($type);
      }else{
-        $q_string = "SELECT l.name,l.description,l.cost FROM locations l
-        WHERE name = ? AND cost <= ?";
-        $query = $this->db->query($q_string,array($name,$cost));
+        $q_string = "SELECT * FROM locations l
+        WHERE name = ? AND type_id = ?";
+        $query = $this->db->query($q_string,array($name, $type));
         $rows = $query->result('Location');
         return $rows;
      }
   }
 
   public function search_by_name($name) {
-     $q_string = "SELECT l.name,l.description,l.cost FROM locations l
-     WHERE name = ?";
+    $name = "%" . $name . "%";
+     $q_string = "SELECT * FROM locations l
+     WHERE name LIKE ?";
      $query = $this->db->query($q_string,array($name));
      $rows = $query->result('Location');
      return $rows;
   }
 
+  public function search_by_type($type) {
+     $q_string = "SELECT * FROM locations l
+     WHERE type_id = ?";
+     $query = $this->db->query($q_string,array($type));
+     $rows = $query->result('Location');
+     return $rows;
+  }
+
   public function search_by_cost($cost) {
-     $q_string = "SELECT l.name,l.description,l.cost FROM locations l
+     $q_string = "SELECT * FROM locations l
      WHERE cost <= ?";
      $query = $this->db->query($q_string,array($cost));
      $rows = $query->result('Location');

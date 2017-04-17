@@ -59,7 +59,10 @@ class Dashboard extends CI_Controller {
 	//If a specific location is specified, show info about that location
 	public function locations()
 	{
-		$locations = $this->Location->get_locations();
+		if(null !== $this->input->get('name') || null !== $this->input->get('type')) //Search locations
+			$locations = $this->Location->search_locations($this->input->get('name'), $this->input->get('type'));
+		else
+			$locations = $this->Location->get_locations();
 
 		$types_by_id = $this->Type->get_types_by_id();
 
