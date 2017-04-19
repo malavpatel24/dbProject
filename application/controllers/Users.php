@@ -57,8 +57,20 @@ class Users extends CI_Controller {
 		$user->email = $this->input->post('email');
 		$user->password = $this->input->post('password');
 
-		if(!$this->User->create_user($user))
-			$this->load->view('register', ['errors' => ['This email is already in use.']]);
+		if($user->password != $this->input->post('password2'))
+		{
+			$this->load->view('header');
+			$user->password = ''; //Clear password on error
+			$this->load->view('register', ['errors' => ['Please confirm that the passwords enter match.'], 'user' => $user]);
+			$this->load->view('footer');
+		}
+		else if(!$this->User->create_user($user))
+		{
+			$this->load->view('header');
+			$user->password = ''; //Clear password on error
+			$this->load->view('register', ['errors' => ['This email is already in use.'], 'user' => $user]);
+			$this->load->view('footer');
+		}
 		else
 			redirect(site_url() . 'users/login');
 	}

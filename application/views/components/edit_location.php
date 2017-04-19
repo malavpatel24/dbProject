@@ -13,7 +13,7 @@
     <div class="col-xs-3">
       <div class="form-group">
         <label>Location Name</label>
-        <input type="text" class="form-control" name="locationName" value="<?php echo $location->name; ?>" required <?php if($disabled) echo "disabled" ?>>
+        <input type="text" class="form-control" name="locationName" value="<?php echo $location->name; ?>" maxlength="45" required <?php if($disabled) echo "disabled" ?>>
       </div>
     </div>
     <div class="col-xs-3">
@@ -39,7 +39,7 @@
     <div class="col-xs-3">
       <div class="form-group">
         <label>Describe average cost for a visit</label>
-        <input type="text" class="form-control" name = "cost" value="<?php echo $location->cost; ?>" required <?php if($disabled) echo "disabled" ?>></input>
+        <input type="text" class="form-control" name = "cost" value="<?php echo $location->cost; ?>" maxlength="45" required <?php if($disabled) echo "disabled" ?>></input>
       </div>
     </div>
     <div class="col-xs-3">

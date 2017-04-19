@@ -13,7 +13,7 @@
     <div class="col-xs-3">
       <div class="form-group">
         <label>Location Name</label>
-        <input type="text" class="form-control" name="locationName" placeholder="Name" required>
+        <input type="text" class="form-control" name="locationName" placeholder="Name" maxlength="45" required>
       </div>
     </div>
     <div class="col-xs-3">
@@ -39,7 +39,7 @@
     <div class="col-xs-3">
       <div class="form-group">
         <label>Describe average cost for a visit</label>
-        <input type="text" class="form-control" name="cost" required></input>
+        <input type="text" class="form-control" name="cost" maxlength="45" required></input>
       </div>
     </div>
     <div class="col-xs-3">

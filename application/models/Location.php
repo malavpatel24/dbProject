@@ -40,13 +40,12 @@ class Location extends CI_Model {
   //Returns a location ranking specified by id
   public function get_location_ranking($id)
   {
-      $q_string = "CALL Location_Rating(?)"; //Change this to get all but password
+      $q_string = "SELECT * FROM location_rankings WHERE location_id=?"; //Change this to get all but password
       $query = $this->db->query($q_string, array($id));
       $rows = $query->result(); //Returns results as array of user objects
-      $query->next_result();
 
-      if(isset($rows[0]->rating))
-        return $rows[0]->rating;
+      if(isset($rows[0]->ranking))
+        return $rows[0]->ranking;
       else
         return 0;
   }

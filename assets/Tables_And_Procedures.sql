@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `Users_For_Admin`;
 /*!50001 DROP VIEW IF EXISTS `Users_For_Admin`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `Users_For_Admin` AS SELECT 
+/*!50001 CREATE VIEW `Users_For_Admin` AS SELECT
  1 AS `id`,
  1 AS `name`,
  1 AS `email`,
@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `Users_For_Login`;
 /*!50001 DROP VIEW IF EXISTS `Users_For_Login`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `Users_For_Login` AS SELECT 
+/*!50001 CREATE VIEW `Users_For_Login` AS SELECT
  1 AS `email`,
  1 AS `password`*/;
 SET character_set_client = @saved_cs_client;
@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `Users_For_Users`;
 /*!50001 DROP VIEW IF EXISTS `Users_For_Users`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `Users_For_Users` AS SELECT 
+/*!50001 CREATE VIEW `Users_For_Users` AS SELECT
  1 AS `id`,
  1 AS `name`,
  1 AS `email`*/;
@@ -324,25 +324,25 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Swap_Locations_Order`(IN user_id INT, IN above_id INT, IN below_id INT)
 BEGIN
 	DECLARE above_order, below_order INT;
-    
-    SELECT UL.order INTO above_order 
-    FROM user_locations UL 
+
+    SELECT UL.order INTO above_order
+    FROM user_locations UL
     WHERE UL.user_id = user_id
 		AND UL.location_id = above_id;
-	
-    SELECT UL.order INTO below_order 
-    FROM user_locations UL 
+
+    SELECT UL.order INTO below_order
+    FROM user_locations UL
     WHERE UL.user_id = user_id
 		AND UL.location_id = below_id;
-        
-	UPDATE user_locations UL 
-    SET UL.order = below_order 
-    WHERE UL.user_id = user_id 
+
+	UPDATE user_locations UL
+    SET UL.order = below_order
+    WHERE UL.user_id = user_id
 		AND UL.location_id = above_id;
-        
-	UPDATE user_locations UL 
-    SET UL.order = above_order 
-    WHERE UL.user_id = user_id 
+
+	UPDATE user_locations UL
+    SET UL.order = above_order
+    WHERE UL.user_id = user_id
 		AND UL.location_id =below_id;
 
 END ;;
