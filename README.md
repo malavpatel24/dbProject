@@ -1,6 +1,24 @@
 # Location Bucket-List!
 
-Woo!
+This was a group project consisting of three members: Kevin Dennis, Chris Salgado, and Malavkumar
+Patel.
+
+Our enterprise management system will be a web application that allows users to follow,
+track and/or lookup ideal bucket list places to go. The purpose of this application is to allow
+users to create and find exciting things to add to their bucket list, and provide a convenient,
+easy-to-use environment to track them.
+The website applications database will consist of 8 schemas with multiple relations
+between each table. In total, our user table will relate to 3 other tables and the location table will
+relate to 5 other tables, with user and location having primary keys relatable to their respective
+tables.
+
+Our application is developed using the CodeIgniter Framework, and Bootstrap styling
+template. CodeIgniter is designed and used with PHP, and works with the Apache Server, with
+Mod_Rewrite enabled, to allow functionality to be separated into Controllers, Models, and
+Views.
+
+
+
 
 # Setting up the database
 
