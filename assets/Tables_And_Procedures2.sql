@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `locBucket`;
+USE `locBucket`;
 -- MySQL dump 10.13  Distrib 5.7.13, for linux-glibc2.5 (x86_64)
 --
 -- Host: 127.0.0.1    Database: locBucket
@@ -40,7 +42,7 @@ DROP TABLE IF EXISTS `location_rankings`;
 /*!50001 DROP VIEW IF EXISTS `location_rankings`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `location_rankings` AS SELECT 
+/*!50001 CREATE VIEW `location_rankings` AS SELECT
  1 AS `location_id`,
  1 AS `ranking`*/;
 SET character_set_client = @saved_cs_client;
@@ -175,7 +177,7 @@ DROP TABLE IF EXISTS `users_passless`;
 /*!50001 DROP VIEW IF EXISTS `users_passless`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `users_passless` AS SELECT 
+/*!50001 CREATE VIEW `users_passless` AS SELECT
  1 AS `id`,
  1 AS `name`,
  1 AS `email`,
@@ -284,25 +286,25 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Swap_Locations_Order`(IN user_id INT, IN above_id INT, IN below_id INT)
 BEGIN
 	DECLARE above_order, below_order INT;
-    
-    SELECT UL.order INTO above_order 
-    FROM user_locations UL 
+
+    SELECT UL.order INTO above_order
+    FROM user_locations UL
     WHERE UL.user_id = user_id
 		AND UL.location_id = above_id;
-	
-    SELECT UL.order INTO below_order 
-    FROM user_locations UL 
+
+    SELECT UL.order INTO below_order
+    FROM user_locations UL
     WHERE UL.user_id = user_id
 		AND UL.location_id = below_id;
-        
-	UPDATE user_locations UL 
-    SET UL.order = below_order 
-    WHERE UL.user_id = user_id 
+
+	UPDATE user_locations UL
+    SET UL.order = below_order
+    WHERE UL.user_id = user_id
 		AND UL.location_id = above_id;
-        
-	UPDATE user_locations UL 
-    SET UL.order = above_order 
-    WHERE UL.user_id = user_id 
+
+	UPDATE user_locations UL
+    SET UL.order = above_order
+    WHERE UL.user_id = user_id
 		AND UL.location_id =below_id;
 
 END ;;

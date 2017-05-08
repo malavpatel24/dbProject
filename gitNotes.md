@@ -22,4 +22,4 @@
 - git branch (filename)   - creates a copy of the master branch
 
 #### vim notes
- - will add later..
+ - will update soon...
